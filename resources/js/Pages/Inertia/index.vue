@@ -1,5 +1,9 @@
-,<script setup>
+<script setup>
 import {Link} from '@inertiajs/inertia-vue3'
+
+defineProps({
+    blogs: Array
+})
 </script>
 
 <template>
@@ -10,5 +14,15 @@ import {Link} from '@inertiajs/inertia-vue3'
         </div>
         <a href="/">aタグでWelcomeに移動</a><br>
         <Link href="/">LinkでWelcomeに移動</Link>
+
+        <ul>
+            <li v-for="blog in blogs" :key="blog.id">
+            件名：
+            <Link class="text-blue-400" :href="route('inertia.show',{id: blog.id})">
+                {{ blog.title }}
+            </Link>,
+            本文：{{ blog.content }}
+            </li>
+        </ul>
     </div>
 </template>
