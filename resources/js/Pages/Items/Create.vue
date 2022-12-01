@@ -3,10 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import { reactive } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
-
-defineProps({
-    errors: Object
-})
+import ValidationErrors from '@/Components/ValidationErrors.vue';
 
 const form = reactive({
     name: null,
@@ -30,6 +27,7 @@ const storeItem = () => {
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <ValidationErrors class="mt-4 text-center" />
                     <section class="text-gray-600 body-font relative">
                         <form @submit.prevent="storeItem">
                             <div class="container px-5 py-8 mx-auto">
