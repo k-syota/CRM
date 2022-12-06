@@ -33,9 +33,11 @@ const searchCustomers = () => {
                             <FlashMessage />
                             <div class="flex my-4 lg:w-2/3 w-full mx-auto">
                                 <div>
-                                    <input type="text" name="search" v-model="search" placeholder="検索">
+                                    <input
+                                    class="rounded"
+                                    type="text" name="search" v-model="search" placeholder="検索">
                                     <button
-                                    class="bg-blue-300 text-white px-2 py-2 ml-2"
+                                    class="bg-blue-300 text-white px-2 py-2 ml-2 rounded"
                                     @click="searchCustomers">
                                         検索
                                     </button>
