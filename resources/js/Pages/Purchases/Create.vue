@@ -1,14 +1,27 @@
 <script setup>
 import { getToday } from '@/getToday'
-import { reactive,onMounted } from 'vue';
+import { reactive,onMounted,ref } from 'vue';
 
 const props = defineProps({
-    'customers': Array
+    'customers': Array,
+    'items': Array
 })
+
+const itemList = ref([])
 
 onMounted(() => {
     form.date = getToday();
+    props.items.forEach(item => {
+        itemList.value.push({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: 0,
+        })
+    })
 })
+
+const quantity = ['0','1','2','3','4','5','6','7','8','9']
 
 const form = reactive({
     date: null,
@@ -27,5 +40,32 @@ const form = reactive({
         :key="customer.id">
         {{ customer.id }} : {{ customer.name }}
         </option>
-    </select>
+    </select><br>
+    商品<br>
+    <table>
+        <thead>
+            <tr>
+                <th>商品ID</th>
+                <th>商品名</th>
+                <th>商品価格</th>
+                <th>数量</th>
+                <th>小計</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in itemList">
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }}</td>
+                <td>
+                    <select name="quantity" id="" v-model="item.quantity">
+                        <option v-for="q in quantity" :value="q">{{ q }}</option>
+                    </select>
+                </td>
+                <td>
+                    {{ item.price * item.quantity }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </template>
