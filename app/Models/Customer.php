@@ -21,7 +21,7 @@ class Customer extends Model
         'memo'
     ];
 
-    public function scopeSearchCustomer($query,$input = null)
+    public function scopeSearchCustomers($query,$input = null)
     {
         if(!empty($input)){
             if(Customer::where('kana','like',$input.'%')
