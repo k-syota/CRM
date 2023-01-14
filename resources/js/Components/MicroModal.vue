@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const isShow = ref(false)
 const toggleStatus = () => {isShow.value = !isShow.value}
-const search = ref('')
+const search = ref("")
 const customers = reactive({})
 
 onMounted(()=>{
@@ -16,18 +16,14 @@ onMounted(()=>{
 
 const searchCustomers = async () => {
     try{
-        await axios.get('/api/searchCustomers/',{
-            params: {
-                search: search.value
-            }
-        })
+        await axios.get(`/api/searchCustomers/?search=${search.value}`)
         .then( res => {
             console.log(res.data)
             customers.value = res.data
         })
-        toggleStatus()
+        isShow.value = !isShow.value
     } catch (e){
-    console.log(e.message)
+        console.log(e.message)
     }
 }
 
