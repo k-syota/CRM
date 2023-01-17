@@ -48,24 +48,24 @@ const searchCustomers = () => {
                                 class="flex ml-auto text-white bg-green-600 border-0 py-2 px-6 focus:outline-none hover:bg-green-400 rounded">顧客登録</Link>
                             </div>
                             <div class="lg:w-2/3 w-full mx-auto overflow-auto">
-                            <table class="table-auto w-full text-left whitespace-no-wrap">
-                                <thead>
-                                <tr>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">ID</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">指名</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">かな</th>
-                                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">電話番号</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="customer in customers.data" :key="customer.id">
-                                    <td class="px-4 py-3">{{ customer.id }}</td>
-                                    <td class="px-4 py-3">{{ customer.name }}</td>
-                                    <td class="px-4 py-3">{{ customer.kana }}</td>
-                                    <td class="px-4 py-3">{{ customer.tel }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                <table class="table-auto w-full text-left whitespace-no-wrap">
+                                    <thead>
+                                    <tr>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">ID</th>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">指名</th>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">かな</th>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">電話番号</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="customer in customers.data" :key="customer.id">
+                                        <td class="px-4 py-3">{{ customer.id }}</td>
+                                        <td class="px-4 py-3">{{ customer.name }}</td>
+                                        <td class="px-4 py-3">{{ customer.kana }}</td>
+                                        <td class="px-4 py-3">{{ customer.tel }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <Pagination class="mt-6" :links="customers.links"></Pagination>
