@@ -21,7 +21,7 @@ class Customer extends Model
         'memo'
     ];
 
-    public function scopeSearchCustomer($query,$input = null)
+    public function scopeSearchCustomers($query,$input = null)
     {
         if(!empty($input)){
             if(Customer::where('kana','like',$input.'%')
@@ -30,5 +30,10 @@ class Customer extends Model
                 ->orWhere('tel','like',$input.'%');
             }
         }
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
     }
 }
