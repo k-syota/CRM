@@ -14,10 +14,18 @@ const searchCustomers = async () => {
             console.log(res.data)
             customers.value = res.data
         })
-        isShow.value = !isShow.value
+        toggleStatus()
     } catch (e){
         console.log(e.message)
     }
+}
+
+const emit = defineEmits(['update:customerId'])
+
+const setCustomer = e => {
+    search.value = e.kana
+    emit('update:customerId',e.id)
+    toggleStatus()
 }
 
 </script>
@@ -45,7 +53,11 @@ const searchCustomers = async () => {
                         </thead>
                         <tbody>
                         <tr v-for="customer in customers.value.data" :key="customer.id">
-                            <td class="px-4 py-3">{{ customer.id }}</td>
+                            <td class="px-4 py-3">
+                                <button type="button" @click="setCustomer({id: customer.id, kana: customer.kana})" class="text-blue-400">
+                                    {{ customer.id }}
+                                </button>
+                            </td>
                             <td class="px-4 py-3">{{ customer.name }}</td>
                             <td class="px-4 py-3">{{ customer.kana }}</td>
                             <td class="px-4 py-3">{{ customer.tel }}</td>
