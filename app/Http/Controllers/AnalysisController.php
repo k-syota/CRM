@@ -23,7 +23,7 @@ class AnalysisController extends Controller
         ->selectRaw('id, sum(subtotal) as total, customer_name, status, created_at') ->orderBy('created_at')
         ->paginate(50);
 
-        dd($period);
+        // dd($period);
 
         return Inertia::render('Analysis');
     }
