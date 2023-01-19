@@ -3,13 +3,35 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import{reactive ,onMounted} from 'vue';
 import {getToday} from '@/getToday'
+import axios from 'axios';
 
 onMounted(()=>{
     form.startDate = getToday()
     form.endDate = getToday()
 })
 
-const form = reactive({startDate:null, endDate:null})
+const form = reactive({
+    startDate: null,
+    endDate: null,
+    type: 'perDay'
+})
+
+const getDate = async () => {
+    try{
+        await axios.get('/api/analysis/',{
+            params: {
+                startDate:form.startDate,
+                endDate:form.endDate,
+                type:form.type,
+            }
+        })
+        .then(res => {
+            console.log(res.data)
+        })
+    }catch(e){
+        console.log(e.message)
+    }
+}
 </script>
 
 <template>
@@ -24,7 +46,7 @@ const form = reactive({startDate:null, endDate:null})
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <form @submit.prevent="">
+                        <form @submit.prevent="getDate">
                             From: <input type="date" name="startDate" v-model="form.startDate">
                             To: <input type="date" name="endDate" v-model="form.endDate"><br>
                             <button class="flex mx-auto text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">
