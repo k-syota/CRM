@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Scopes\Subtotal;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,17 +19,23 @@ class Order extends Model
     public function scopeBetweenDate($query, $startDate = null, $endDate = null)
     {
     if(is_null($startDate) && is_null($endDate))
-    { return $query; }
+    {
+        return $query;
+    }
     if(!is_null($startDate) && is_null($endDate))
-    { return $query->where('created_at', ">=", $startDate); }
+    {
+        return $query->where('created_at', ">=", $startDate);
+    }
     if(is_null($startDate) && !is_null($endDate))
     {
-    return $query->where('created_at', '<=', $endDate);
+        $endDate1 = Carbon::parse($endDate)->addDay(1);
+        return $query->where('created_at', '<=', $endDate1);
     }
     if(!is_null($startDate) && !is_null($endDate))
     {
-    return $query->where('created_at', ">=", $startDate)
-    ->where('created_at', '<=', $endDate);
+        $endDate1 = Carbon::parse($endDate)->addDay(1);
+        return $query->where('created_at', ">=", $startDate)
+        ->where('created_at', '<=', $endDate);
     }
     }
 }

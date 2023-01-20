@@ -20,6 +20,7 @@ class PurchaseFactory extends Factory
         return [
             'customer_id' => rand(1,Customer::count()),
             'status' => $this->faker->boolean,
+            'created_at' => $this->faker->dateTimeBetween($startDate = '-2 week', $endDate = '+2 week'),
         ];
     }
 }
