@@ -35,7 +35,7 @@ class Order extends Model
     {
         $endDate1 = Carbon::parse($endDate)->addDay(1);
         return $query->where('created_at', ">=", $startDate)
-        ->where('created_at', '<=', $endDate);
+        ->where('created_at', '<=', $endDate1);
     }
     }
 }
