@@ -1,5 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Chart from '@/Components/Chart.vue'
 import { Head } from '@inertiajs/inertia-vue3';
 import{reactive ,onMounted} from 'vue';
 import {getToday} from '@/getToday'
@@ -55,6 +56,9 @@ const getDate = async () => {
                                 分析する
                             </button>
                         </form>
+
+                        <Chart />
+
                         <div v-if="data.data" class="lg:w-2/3 w-full mx-auto overflow-auto">
                             <table class="table-auto w-full text-left whitespace-no-wrap">
                                 <thead>
