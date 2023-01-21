@@ -30,6 +30,8 @@ const getDate = async () => {
         })
         .then(res => {
             data.data = res.data.data;
+            data.labels = res.data.labels;
+            data.totals = res.data.totals;
         })
     }catch(e){
         console.log(e.message)
@@ -56,9 +58,9 @@ const getDate = async () => {
                                 分析する
                             </button>
                         </form>
-
-                        <Chart />
-
+                        <div v-if="data.data">
+                            <Chart :data="data"/>
+                        </div>
                         <div v-if="data.data" class="lg:w-2/3 w-full mx-auto overflow-auto">
                             <table class="table-auto w-full text-left whitespace-no-wrap">
                                 <thead>
