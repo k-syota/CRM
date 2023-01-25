@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Purchase::factory(100)->create();
 
         $items = \App\Models\Item::all();
-        Purchase::factory(100)->create()
+        Purchase::factory(500)->create()
         //useで関数の外にある$itemを使用できるようにしている
         ->each(function(Purchase $purchase) use ($items){
             $purchase->items()->attach(
