@@ -59,11 +59,22 @@ class AnalysisController extends Controller
         ->selectRaw('f, count(f)')->orderBy('f', 'desc')
         ->get();
         $mCount = DB::table($subQuery)->groupBy('m')
-        ->selectRaw('m, count(m)')->orderBy('m', 'desc')
+        ->selectRaw('m, count(m)')->orderBy('m', 'desc');
+
+        $data = DB::table($subQuery)
+        ->groupBy('r')
+        ->selectRaw('concat("r_", r) as rRank,
+        count(case when f = 5 then 1 end ) as f_5,
+        count(case when f = 4 then 1 end ) as f_4,
+        count(case when f = 3 then 1 end ) as f_3,
+        count(case when f = 2 then 1 end ) as f_2,
+        count(case when f = 1 then 1 end ) as f_1')
+        ->orderBy('rRank', 'desc')
         ->get();
 
         // dd($subQuery);
-        dd($total,$rCount,$fCount,$mCount);
+        // dd($total,$rCount,$fCount,$mCount);
+        dd($data);
 
         return Inertia::render('Analysis');
     }
